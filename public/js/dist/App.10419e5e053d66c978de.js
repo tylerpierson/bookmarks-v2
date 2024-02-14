@@ -11,35 +11,13 @@
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ App)
 /* harmony export */ });
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-Object(function webpackMissingModule() { var e = new Error("Cannot find module './pages/Home/Home'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-Object(function webpackMissingModule() { var e = new Error("Cannot find module './pages/Dashboard/Dashboard'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-Object(function webpackMissingModule() { var e = new Error("Cannot find module './pages/Bookmark/Bookmark'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-Object(function webpackMissingModule() { var e = new Error("Cannot find module './pages/About/About'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-Object(function webpackMissingModule() { var e = new Error("Cannot find module './components/Nav/Nav'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _pages_Main_Main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pages/Main/Main */ "./src/pages/Main/Main.js");
 /* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-
-
-
-
 
 function App() {
   return /*#__PURE__*/React.createElement("div", {
     className: "App"
-  }, /*#__PURE__*/React.createElement(Object(function webpackMissingModule() { var e = new Error("Cannot find module './components/Nav/Nav'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), null), /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Routes, null, /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Route, {
-    path: "/",
-    element: /*#__PURE__*/React.createElement(Object(function webpackMissingModule() { var e = new Error("Cannot find module './pages/Home/Home'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), null)
-  }), /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Route, {
-    path: "/about",
-    element: /*#__PURE__*/React.createElement(Object(function webpackMissingModule() { var e = new Error("Cannot find module './pages/About/About'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), null)
-  }), /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Route, {
-    path: "/dashboard",
-    element: /*#__PURE__*/React.createElement(Object(function webpackMissingModule() { var e = new Error("Cannot find module './pages/Dashboard/Dashboard'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), null)
-  }), /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Route, {
-    path: "/bookmarks/:symbol",
-    element: /*#__PURE__*/React.createElement(Object(function webpackMissingModule() { var e = new Error("Cannot find module './pages/Bookmark/Bookmark'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), null)
-  })));
+  }, /*#__PURE__*/React.createElement(_pages_Main_Main__WEBPACK_IMPORTED_MODULE_0__["default"], null));
 }
 
 /***/ }),
@@ -60,6 +38,22 @@ function App() {
 
 const root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(document.getElementById("app"));
 root.render( /*#__PURE__*/React.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, null, /*#__PURE__*/React.createElement(_App__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
+
+/***/ }),
+
+/***/ "./src/pages/Main/Main.js":
+/*!********************************!*\
+  !*** ./src/pages/Main/Main.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Main)
+/* harmony export */ });
+/* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function Main(props) {
+  return /*#__PURE__*/React.createElement("h1", null, "This is the Main Page");
+}
 
 /***/ })
 
@@ -224,7 +218,7 @@ root.render( /*#__PURE__*/React.createElement(react__WEBPACK_IMPORTED_MODULE_0__
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["vendors-node_modules_react-dom_client_js-node_modules_react-router_dist_index_js"], () => (__webpack_require__("./src/index.js")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["vendors-node_modules_react-dom_client_js"], () => (__webpack_require__("./src/index.js")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
