@@ -1,25 +1,14 @@
 body {
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: white;
-}
-
-.banner{
+    background: rgb(41, 46, 74);
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    img {
-        width: 50%;
-        max-height: 300px;
-    }
-    h1 {
-        width: 100%;
-        text-align: center;
-        color: rgba(23,5, 58, 0.8);
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    color: white;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    .hero {
+        display: flex;
     }
 }
