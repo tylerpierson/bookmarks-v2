@@ -6,11 +6,16 @@ const logger = require('morgan')
 
 
 app.use(express.json()) // req.body
+app.use((req, res, next) => {
+    res.locals.data = {}
+    next()
+})
 app.use(logger('dev'))
 app.use(favicon(path.join(__dirname, 'public', 'img','logo.png')))
 app.use(express.static(path.join(__dirname, 'public')))
+app.use('/api/users', require('./routes/api/users'))
 app.use('/api/bookmarks', require('./routes/api/bookmarks'))
-// http://localhost:8000/api/bookmarks/completed
+// http://localhost:8000/api/bookmarks
 app.get('*', (req, res) => {
 	res.sendFile(path.join(__dirname, 'public', 'index.html'))
 })

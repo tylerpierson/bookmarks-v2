@@ -1,40 +1,51 @@
+require('dotenv').config()
+const User = require('../../models/user')
 const Bookmark = require('../../models/bookmark')
 
+// delete bookmark
+// create bookmark
+// update bookmark
+
+const destroyBookmark = async (req, res, next) => {
+    try {
+        const deletedBookmark = await Bookmark.findByIdAndDelete(req.params.id)
+        res.locals.data.bookmark = deletedBookmark
+        next()
+    } catch (error) {
+        res.status(400).json({ msg: error.message })
+    }
+}
+
+const updateBookmark = async (req, res, next) => {
+    try {
+        const updatedBookmark = await Bookmark.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        res.locals.data.bookmark = updatedBookmark
+        next()
+    } catch (error) {
+        res.status(400).json({ msg: error.message })
+    }
+}
+
+const createBookmark = async (req, res, next) => {
+    try {
+        const createdBookmark = await Bookmark.create(req.body)
+        const user = await User.findOne({ email: res.locals.data.email })
+        user.bookmarks.addToSet(createdBookmark)
+        await user.save()
+        res.locals.data.bookmark = createdBookmark
+        next()
+    } catch (error) {
+        res.status(400).json({ msg: error.message })
+    }
+}
+
+const respondWithBookmark = (req, res) => {
+    res.json(res.locals.data.bookmark)
+}
 
 module.exports = {
-    show,
-    index,
-    create
-}
-
-async function index(req, res) {
-    try {
-        const bookmarks = await Bookmark.find({})
-        res.status(200).json(bookmarks)
-    } catch (error) {
-        res.status(400).json({ msg: error.message })
-    }
-}
-
-/****** C - Create *******/
-async function create(req, res){
-    try {
-        const bookmark = new Bookmark(req.body)
-        await bookmark.save()
-        res.status(200).json(bookmark)
-    } catch (error) {
-        res.status(400).json({ msg: error.message })
-    }
-}
-
-/****** R - Show *****/
-
-async function show(req ,res) {
-    try {
-        const foundBookmark = await Bookmark.findOne({symbol: req.params.symbol})
-        if (!foundBookmark) throw new Error("Could not find bookmark")
-        res.status(200).json(foundBookmark)
-    } catch (error) {
-        res.status(400).json({ msg: error.message })
-    }
+    destroyBookmark,
+    updateBookmark,
+    createBookmark,
+    respondWithBookmark
 }
