@@ -1,0 +1,44 @@
+.form {
+    align-self: center;
+    display: grid;
+    grid: 1fr 3fr;
+    gap: 12.5px;
+    color: var(--text-light);
+    min-height: 8rem;
+    label {
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+    }
+    div {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    input {
+        padding: 1vmin;
+        font-size: 20px;
+        border: 1px solid var(--text-dark)
+    }
+    .button {
+        margin: 1vmin;
+        padding: 1vmin;
+        color: var(--offwhite);
+        background-color: var(--text-dark);
+        border-radius: .5vmin;
+        min-height: 4rem;
+    }
+}
+
+h2 {
+    text-align: center;
+    color: var(--text-dark);
+    font-size: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
