@@ -8,16 +8,14 @@ const ensureLoggedIn = require('../../config/ensureLoggedIn')
 SignUp
 */
 router.post('/', userCtrl.signUp, userCtrl.respondWithToken)
-
 /*
 /api/users/login
 Login
 */
 router.post('/login', userCtrl.login, userCtrl.respondWithToken)
-
 /*
 /api/users/bookmarks
-Get Bookmarks by User
+Get Bookmarks By User
 */
 router.get('/bookmarks', checkToken, ensureLoggedIn, userCtrl.getBookmarksByUser, userCtrl.respondWithBookmarks)
 

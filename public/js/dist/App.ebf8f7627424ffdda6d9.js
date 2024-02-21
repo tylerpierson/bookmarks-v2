@@ -13,11 +13,9 @@
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _App_module_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.module.scss */ "./src/App.module.scss");
-/* harmony import */ var _components_Auth_Auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Auth/Auth */ "./src/components/Auth/Auth.js");
-/* harmony import */ var _components_CreateBookmark_CreateBookmark__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/CreateBookmark/CreateBookmark */ "./src/components/CreateBookmark/CreateBookmark.js");
-/* harmony import */ var cors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! cors */ "./node_modules/cors/lib/index.js");
-/* harmony import */ var cors__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(cors__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_Auth_Auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Auth/Auth */ "./src/components/Auth/Auth.js");
+/* harmony import */ var _components_CreateBookmark_CreateBookmark__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/CreateBookmark/CreateBookmark */ "./src/components/CreateBookmark/CreateBookmark.js");
+/* harmony import */ var _components_BookmarkList_BookmarkList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/BookmarkList/BookmarkList */ "./src/components/BookmarkList/BookmarkList.js");
 /* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -28,13 +26,11 @@ function _toPrimitive(t, r) { if ("object" != typeof t || !t) return t; var e = 
 
 
 
-
 function App() {
-  const [bookmark, setBookmark] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
-    title: '',
-    url: ''
-  });
-  const [bookmarks, setBookmarks] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  /*
+    Login, SignUp, CreateBookmark, ListBookmarksByUser, DeleteBookmark, UpdateBookmark
+    */
+
   const handleChangeAuth = event => {
     setCredentials(_objectSpread(_objectSpread({}, credentials), {}, {
       [event.target.name]: event.target.value
@@ -50,8 +46,12 @@ function App() {
     password: '',
     name: ''
   });
+  const [bookmark, setBookmark] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    title: '',
+    url: ''
+  });
+  const [bookmarks, setBookmarks] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [token, setToken] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
-  // Login
   const login = async () => {
     try {
       const response = await fetch('/api/users/login', {
@@ -71,8 +71,6 @@ function App() {
       console.error(error);
     }
   };
-
-  // Signup
   const signUp = async () => {
     try {
       const response = await fetch('/api/users', {
@@ -89,8 +87,6 @@ function App() {
       console.error(error);
     }
   };
-
-  // createBookmark
   const createBookmark = async () => {
     try {
       const response = await fetch('/api/bookmarks', {
@@ -112,14 +108,12 @@ function App() {
       });
     }
   };
-
-  // listBookmarkByUser
-  const listBookmarkByUser = async () => {
+  const listBookmarksByUser = async () => {
     try {
       const response = await fetch('/api/users/bookmarks', {
         method: 'GET',
         headers: {
-          'Content-Type': 'applicatoin/json',
+          'Content-Type': 'application/json',
           Authorization: "Bearer ".concat(JSON.parse(localStorage.getItem('token')))
         }
       });
@@ -129,8 +123,24 @@ function App() {
       console.error(error);
     }
   };
-
-  // UpdateBookmark
+  const deleteBookmark = async id => {
+    try {
+      const response = await fetch("/api/bookmarks/".concat(id), {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: "Bearer ".concat(token)
+        }
+      });
+      const data = await response.json();
+      const bookmarksCopy = [...bookmarks];
+      const index = bookmarksCopy.findIndex(bookmark => id === bookmark._id);
+      bookmarksCopy.splice(index, 1);
+      setBookmarks(bookmarksCopy);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const updateBookmark = async (id, updatedData) => {
     try {
       const response = await fetch("/api/bookmarks/".concat(id), {
@@ -150,31 +160,10 @@ function App() {
       console.error(error);
     }
   };
-
-  //deleteBookmarks
-  const deleteBookmark = async id => {
-    try {
-      const index = bookmarks.findIndex(bookmark => bookmark._id === id);
-      const bookmarksCopy = [...bookmarks];
-      const response = await fetch("/api/bookmarks/".concat(id), {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      await response.json();
-      bookmarksCopy.splice(index, 1);
-      setBookmarks(bookmarksCopy);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  // Use effect to display the list of bookmarks when the page first loads
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     const tokenData = localStorage.getItem('token');
     if (tokenData && tokenData !== 'null' && tokenData !== 'undefined') {
-      listBookmarkByUser();
+      listBookmarksByUser();
     }
   }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
@@ -183,23 +172,20 @@ function App() {
       setToken(JSON.parse(tokenData));
     }
   }, []);
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: _App_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].App
-  }, /*#__PURE__*/React.createElement(_components_Auth_Auth__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_Auth_Auth__WEBPACK_IMPORTED_MODULE_1__["default"], {
     login: login,
     credentials: credentials,
     handleChangeAuth: handleChangeAuth,
     signUp: signUp
-  }), /*#__PURE__*/React.createElement(_components_CreateBookmark_CreateBookmark__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }), /*#__PURE__*/React.createElement(_components_CreateBookmark_CreateBookmark__WEBPACK_IMPORTED_MODULE_2__["default"], {
     createBookmark: createBookmark,
     bookmark: bookmark,
     handleChange: handleChange
-  }), /*#__PURE__*/React.createElement("ul", null, bookmarks.length ? bookmarks.map(item => /*#__PURE__*/React.createElement("li", {
-    key: item._id
-  }, /*#__PURE__*/React.createElement("h4", null, item.title), /*#__PURE__*/React.createElement("a", {
-    href: item.url,
-    target: "_blank"
-  }, item.url))) : /*#__PURE__*/React.createElement("li", null, "No Bookmarks Added"))));
+  }), /*#__PURE__*/React.createElement(_components_BookmarkList_BookmarkList__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    bookmarks: bookmarks,
+    deleteBookmark: deleteBookmark,
+    updateBookmark: updateBookmark
+  }));
 }
 
 /***/ }),
@@ -249,7 +235,7 @@ function Auth(_ref) {
     onClick: () => {
       setShowSignUp(!showSignUp);
     }
-  }, showSignUp ? 'Sign Up with a New Account Below or Click Here to Login as an Existing User' : 'Welcome Back, Login as an Existing User or Click Here to Sign Up with a New Account'), showSignUp ? /*#__PURE__*/React.createElement(_SignUp_SignUp__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, showSignUp ? 'Sign Up With A New Account Below or Click Here To Login As An Existing User' : 'Welcome Back, Login As An Existing User or Click Here To Sign Up With A New Account'), showSignUp ? /*#__PURE__*/React.createElement(_SignUp_SignUp__WEBPACK_IMPORTED_MODULE_2__["default"], {
     signUp: signUp,
     credentials: credentials,
     handleChangeAuth: handleChangeAuth
@@ -258,6 +244,84 @@ function Auth(_ref) {
     credentials: credentials,
     handleChangeAuth: handleChangeAuth
   })));
+}
+
+/***/ }),
+
+/***/ "./src/components/Bookmark/Bookmark.js":
+/*!*********************************************!*\
+  !*** ./src/components/Bookmark/Bookmark.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Bookmark)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+function Bookmark(_ref) {
+  let {
+    bookmark,
+    updateBookmark,
+    deleteBookmark
+  } = _ref;
+  const [showInput, setShowInput] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const inputRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("h4", {
+    onClick: () => setShowInput(!showInput)
+  }, bookmark.title), /*#__PURE__*/React.createElement("input", {
+    ref: inputRef,
+    style: {
+      display: showInput ? 'block' : 'none'
+    },
+    type: "text",
+    onKeyDown: e => {
+      if (e.key === 'Enter') {
+        const title = inputRef.current.value;
+        updateBookmark(bookmark._id, {
+          title
+        });
+        setShowInput(false);
+      }
+    },
+    defaultValue: bookmark.title
+  }), /*#__PURE__*/React.createElement("a", {
+    href: bookmark.url,
+    target: "_blank",
+    rel: "noreferrer"
+  }, " ", bookmark.url), /*#__PURE__*/React.createElement("button", {
+    onClick: () => deleteBookmark(bookmark._id)
+  }, "Delete Me")));
+}
+
+/***/ }),
+
+/***/ "./src/components/BookmarkList/BookmarkList.js":
+/*!*****************************************************!*\
+  !*** ./src/components/BookmarkList/BookmarkList.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ BookmarkList)
+/* harmony export */ });
+/* harmony import */ var _Bookmark_Bookmark__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Bookmark/Bookmark */ "./src/components/Bookmark/Bookmark.js");
+/* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+function BookmarkList(_ref) {
+  let {
+    bookmarks,
+    updateBookmark,
+    deleteBookmark
+  } = _ref;
+  return /*#__PURE__*/React.createElement("ul", null, bookmarks.length ? bookmarks.map(bookmark => /*#__PURE__*/React.createElement(_Bookmark_Bookmark__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    key: bookmark._id,
+    bookmark: bookmark,
+    updateBookmark: updateBookmark,
+    deleteBookmark: deleteBookmark
+  })) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h2", null, "No Bookmarks Yet... Add one in the Form Above")));
 }
 
 /***/ }),
@@ -278,7 +342,7 @@ function CreateBookmark(_ref) {
     bookmark,
     handleChange
   } = _ref;
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h2", null, "Create a Bookmark"), /*#__PURE__*/React.createElement("form", {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h2", null, "Create A Bookmark"), /*#__PURE__*/React.createElement("form", {
     onSubmit: e => {
       e.preventDefault();
       createBookmark();
@@ -407,85 +471,6 @@ function SignUp(_ref) {
 
 const root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(document.getElementById("app"));
 root.render( /*#__PURE__*/React.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, null, /*#__PURE__*/React.createElement(_App__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./src/App.module.scss":
-/*!********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./src/App.module.scss ***!
-  \********************************************************************************************************************************************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
-// Imports
-
-
-var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
-// Module
-___CSS_LOADER_EXPORT___.push([module.id, ``, "",{"version":3,"sources":[],"names":[],"mappings":"","sourceRoot":""}]);
-// Exports
-___CSS_LOADER_EXPORT___.locals = {};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
-
-
-/***/ }),
-
-/***/ "./src/App.module.scss":
-/*!*****************************!*\
-  !*** ./src/App.module.scss ***!
-  \*****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/styleDomAPI.js */ "./node_modules/style-loader/dist/runtime/styleDomAPI.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/insertBySelector.js */ "./node_modules/style-loader/dist/runtime/insertBySelector.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js */ "./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/insertStyleElement.js */ "./node_modules/style-loader/dist/runtime/insertStyleElement.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/styleTagTransform.js */ "./node_modules/style-loader/dist/runtime/styleTagTransform.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_2_use_1_node_modules_sass_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_App_module_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!../node_modules/sass-loader/dist/cjs.js!../node_modules/postcss-loader/dist/cjs.js!./App.module.scss */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./src/App.module.scss");
-
-      
-      
-      
-      
-      
-      
-      
-      
-      
-
-var options = {};
-
-options.styleTagTransform = (_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default());
-options.setAttributes = (_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default());
-
-      options.insert = _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default().bind(null, "head");
-    
-options.domAPI = (_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default());
-options.insertStyleElement = (_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default());
-
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_2_use_1_node_modules_sass_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_App_module_scss__WEBPACK_IMPORTED_MODULE_6__["default"], options);
-
-
-
-
-       /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_2_use_1_node_modules_sass_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_App_module_scss__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_2_use_1_node_modules_sass_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_App_module_scss__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_2_use_1_node_modules_sass_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_App_module_scss__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
-
 
 /***/ })
 
@@ -645,17 +630,12 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/nonce */
-/******/ 	(() => {
-/******/ 		__webpack_require__.nc = undefined;
-/******/ 	})();
-/******/ 	
 /************************************************************************/
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["vendors-node_modules_cors_lib_index_js-node_modules_css-loader_dist_runtime_api_js-node_modul-4fe8f5"], () => (__webpack_require__("./src/index.js")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["vendors-node_modules_react-dom_client_js"], () => (__webpack_require__("./src/index.js")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
