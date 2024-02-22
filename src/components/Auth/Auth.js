@@ -35,7 +35,7 @@ export default function Auth ({
     <>
       {
             user && user.name
-              ? <h1 className={styles.h1}>Welcome {user.name.toUpperCase()}</h1>
+              ? <h1 className={styles.h1}>Welcome {user.name.charAt(0).toUpperCase() + user.name.slice(1).toLowerCase()}</h1>
               : <>
                 <button
                     className={styles.button}

@@ -256,7 +256,7 @@ function Auth(_ref) {
   }, []);
   return /*#__PURE__*/React.createElement(React.Fragment, null, user && user.name ? /*#__PURE__*/React.createElement("h1", {
     className: _Auth_module_scss__WEBPACK_IMPORTED_MODULE_3__["default"].h1
-  }, "Welcome ", user.name.toUpperCase()) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
+  }, "Welcome ", user.name.charAt(0).toUpperCase() + user.name.slice(1).toLowerCase()) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
     className: _Auth_module_scss__WEBPACK_IMPORTED_MODULE_3__["default"].button,
     onClick: () => {
       setShowSignUp(!showSignUp);
