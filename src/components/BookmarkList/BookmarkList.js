@@ -7,8 +7,10 @@ export default function BookmarkList ({
   deleteBookmark
 }) {
   return (
-    <ul className={styles.ul}>
-      {
+    <>
+      <div className={styles.container}>
+        <ul className={styles.ul}>
+          {
             bookmarks.length
               ? bookmarks.map(bookmark => (
                 <Bookmark
@@ -17,11 +19,13 @@ export default function BookmarkList ({
                   updateBookmark={updateBookmark}
                   deleteBookmark={deleteBookmark}
                 />
-              ))
-              : <>
-                <h2>No Bookmarks Yet... Add one in the Form Above</h2>
-                </>
-        }
-    </ul>
+            ))
+            : <>
+              <h2>No Bookmarks Yet... Add one in the Form Above</h2>
+              </>
+            }
+        </ul>
+      </div>
+    </>
   )
 }

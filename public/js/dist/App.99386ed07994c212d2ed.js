@@ -371,14 +371,16 @@ function BookmarkList(_ref) {
     updateBookmark,
     deleteBookmark
   } = _ref;
-  return /*#__PURE__*/React.createElement("ul", {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: _BookmarkList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].container
+  }, /*#__PURE__*/React.createElement("ul", {
     className: _BookmarkList_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].ul
   }, bookmarks.length ? bookmarks.map(bookmark => /*#__PURE__*/React.createElement(_Bookmark_Bookmark__WEBPACK_IMPORTED_MODULE_0__["default"], {
     key: bookmark._id,
     bookmark: bookmark,
     updateBookmark: updateBookmark,
     deleteBookmark: deleteBookmark
-  })) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h2", null, "No Bookmarks Yet... Add one in the Form Above")));
+  })) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h2", null, "No Bookmarks Yet... Add one in the Form Above")))));
 }
 
 /***/ }),
@@ -599,7 +601,8 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.IMqMrT2eGOGeFiLbCAGg {
   display: flex;
   justify-content: space-between;
   width: 100%;
-}`, "",{"version":3,"sources":["webpack://./src/App.module.scss"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,sBAAA;EACA,uBAAA;EACA,mBAAA;EACA,WAAA;EACA,aAAA;EACA,mCAAA;AACJ;AAAI;EACI,yBAAA;EACA,uBAAA;EACA,yBAAA;EACA,oBAAA;EACA,mBAAA;EACA,kBAAA;EACA,eAAA;EACA,cAAA;EACA,qBAAA;AAER;AADQ;EACI,gCAAA;EACA,iBAAA;EACA,WAAA;EACA,0CAAA;EACA,qBAAA;EACA,qBAAA;EACA,gBAAA;AAGZ;AACI;EACI,aAAA;EACA,8BAAA;EACA,WAAA;AACR","sourcesContent":[".App {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    width: 100%;\n    height: 100vh;\n    background-color: var(--bg-darkest);\n    .button{\n        background: var(--btn-bg);\n        color: var(--text-gold);\n        border: var(--btn-border);\n        padding: .5rem 1rem;\n        border-radius: 30px;\n        text-align: center;\n        cursor: pointer;\n        margin: 0 auto;\n        transition: .3s ease;\n        &:hover {\n            background: rgba(25, 5, 58, 0.8);\n            color: ghostwhite;\n            border: 2px;\n            box-shadow: 0 2px 5px rgba(23, 5, 58, 0.5);\n            transform: scale(1.1);\n            transition: .3s ease;\n            box-shadow: none;\n        }\n    }\n    \n    .container {\n        display: flex;\n        justify-content: space-between;\n        width: 100%;\n    }\n}"],"sourceRoot":""}]);
+  max-height: 600px;
+}`, "",{"version":3,"sources":["webpack://./src/App.module.scss"],"names":[],"mappings":"AAAA;EACI,aAAA;EACA,sBAAA;EACA,uBAAA;EACA,mBAAA;EACA,WAAA;EACA,aAAA;EACA,mCAAA;AACJ;AAAI;EACI,yBAAA;EACA,uBAAA;EACA,yBAAA;EACA,oBAAA;EACA,mBAAA;EACA,kBAAA;EACA,eAAA;EACA,cAAA;EACA,qBAAA;AAER;AADQ;EACI,gCAAA;EACA,iBAAA;EACA,WAAA;EACA,0CAAA;EACA,qBAAA;EACA,qBAAA;EACA,gBAAA;AAGZ;AACI;EACI,aAAA;EACA,8BAAA;EACA,WAAA;EACA,iBAAA;AACR","sourcesContent":[".App {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    width: 100%;\n    height: 100vh;\n    background-color: var(--bg-darkest);\n    .button{\n        background: var(--btn-bg);\n        color: var(--text-gold);\n        border: var(--btn-border);\n        padding: .5rem 1rem;\n        border-radius: 30px;\n        text-align: center;\n        cursor: pointer;\n        margin: 0 auto;\n        transition: .3s ease;\n        &:hover {\n            background: rgba(25, 5, 58, 0.8);\n            color: ghostwhite;\n            border: 2px;\n            box-shadow: 0 2px 5px rgba(23, 5, 58, 0.5);\n            transform: scale(1.1);\n            transition: .3s ease;\n            box-shadow: none;\n        }\n    }\n    \n    .container {\n        display: flex;\n        justify-content: space-between;\n        width: 100%;\n        max-height: 600px;\n    }\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"App": `IMqMrT2eGOGeFiLbCAGg`,
@@ -917,18 +920,26 @@ ___CSS_LOADER_EXPORT___.locals = {
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, `.bbjbxRcitHlDD9VYLS1E {
+___CSS_LOADER_EXPORT___.push([module.id, `.lP8bUeE__NPUKEd25ulU {
+  overflow-y: scroll;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.lP8bUeE__NPUKEd25ulU .bbjbxRcitHlDD9VYLS1E {
+  text-align: center;
   width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
-h2 {
+.lP8bUeE__NPUKEd25ulU h2 {
   color: white;
-}`, "",{"version":3,"sources":["webpack://./src/components/BookmarkList/BookmarkList.module.scss"],"names":[],"mappings":"AAAA;EACI,UAAA;EACA,aAAA;EACA,sBAAA;EACA,mBAAA;AACJ;;AAEA;EACI,YAAA;AACJ","sourcesContent":[".ul {\n    width: 50%;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n}\n\nh2 {\n    color: white;\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/components/BookmarkList/BookmarkList.module.scss"],"names":[],"mappings":"AAAA;EACI,kBAAA;EACA,WAAA;EACA,aAAA;EACA,uBAAA;EACA,uBAAA;AACJ;AAAI;EACI,kBAAA;EACA,UAAA;EACA,aAAA;EACA,sBAAA;EACA,mBAAA;AAER;AACI;EACI,YAAA;AACR","sourcesContent":[".container {\n    overflow-y: scroll;\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: flex-start;\n    .ul {\n        text-align: center;\n        width: 50%;\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n    }\n    \n    h2 {\n        color: white;\n    }\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
+	"container": `lP8bUeE__NPUKEd25ulU`,
 	"ul": `bbjbxRcitHlDD9VYLS1E`
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
