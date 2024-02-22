@@ -13,7 +13,7 @@ export default function Login ({
           login()
         }}
         >
-          <input type='text' value={credentials.email} name='email' onChange={handleChangeAuth} placeholder='Email Here' />
+          <input type='text' value={credentials.email} name='email' onChange={handleChangeAuth} placeholder='Email' />
           <input type='password' value={credentials.password} name='password' onChange={handleChangeAuth} placeholder='Password' />
           <input type='submit' value='Login as an Existing User' />
         </form>

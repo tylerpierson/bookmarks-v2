@@ -465,7 +465,7 @@ function Login(_ref) {
     value: credentials.email,
     name: "email",
     onChange: handleChangeAuth,
-    placeholder: "Email Here"
+    placeholder: "Email"
   }), /*#__PURE__*/React.createElement("input", {
     type: "password",
     value: credentials.password,
@@ -503,22 +503,22 @@ function SignUp(_ref) {
     }
   }, /*#__PURE__*/React.createElement("input", {
     type: "text",
-    value: credentials.email,
-    name: "email",
-    onChange: handleChangeAuth,
-    placeholder: "Email"
-  }), /*#__PURE__*/React.createElement("input", {
-    type: "text",
     value: credentials.name,
     name: "name",
     onChange: handleChangeAuth,
     placeholder: "Name"
   }), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    value: credentials.email,
+    name: "email",
+    onChange: handleChangeAuth,
+    placeholder: "Email"
+  }), /*#__PURE__*/React.createElement("input", {
     type: "password",
     value: credentials.password,
     name: "password",
     onChange: handleChangeAuth,
-    placeholder: "password"
+    placeholder: "Password"
   }), /*#__PURE__*/React.createElement("input", {
     type: "submit",
     value: "Sign Up as New User"
