@@ -43,21 +43,23 @@ export default function Auth ({
                     setShowSignUp(!showSignUp)
                     }}
                 >
-                  {showSignUp ? 'Sign Up With A New Account Below or Click Here To Login As An Existing User' : 'Welcome Back, Login As An Existing User or Click Here To Sign Up With A New Account'}
+                  {showSignUp ? 'Click here to Login' : 'Click here to Sign Up'}
                 </button>
-                {
-                    showSignUp
-                      ? <SignUp
-                          signUp={signUp}
-                          credentials={credentials}
-                          handleChangeAuth={handleChangeAuth}
-                        />
-                      : <Login
-                          login={login}
-                          credentials={credentials}
-                          handleChangeAuth={handleChangeAuth}
-                        />
-                }
+                <div className={styles.container}>
+                  {
+                      showSignUp
+                        ? <SignUp
+                            signUp={signUp}
+                            credentials={credentials}
+                            handleChangeAuth={handleChangeAuth}
+                          />
+                        : <Login
+                            login={login}
+                            credentials={credentials}
+                            handleChangeAuth={handleChangeAuth}
+                          />
+                  }
+                </div>
               </>
         }
 

@@ -1,19 +1,96 @@
 .h1 {
-    background-color: var(--text-dark);
     color: var(--offwhite);
-    font-size: 2rem;
-    border-radius: 4px;
+    font-size: 3rem;
     text-align: center;
 }
 
 .button {
-    background-color: var(--text-dark);
-    color: var(--offwhite);
+    background: var(--btn-bg);
+    color: var(--text-gold);
+    border: var(--btn-border);
     font-size: 2rem;
-    min-height: 10rem;
-    border-radius: 4px;
+    padding: 0 1rem;
+    min-height: 4rem;
+    border-radius: 30px;
     text-align: center;
     cursor: pointer;
     display: block;
     margin: 0 auto;
+    transition: .3s ease;
+    &:hover{
+        background: rgba(25, 5, 58, 0.8);
+        color: ghostwhite;
+        border: 2px;
+        box-shadow: 0 2px 5px rgba(23, 5, 58, 0.5);
+        transform: scale(1.1);
+        transition: .3s ease;
+        box-shadow: none;
+    }
+}
+
+.container {
+    width: 35%;
+    max-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: white;
+    text-shadow: 1px 1px 1px rgb(250, 208, 0);
+    border-radius: 20px;
+    border-right: 1px solid rgb(250, 208, 0);
+    border-left: 1px solid rgb(250, 208, 0);
+    border-bottom: 3px solid rgb(250, 208, 0);
+    border-top: 3px solid rgb(250, 208, 0);
+    padding: 5rem;
+    box-shadow: 25px 14px 100px rgb(69, 73, 102);
+    background: rgb(58, 63, 99);
+    margin-top: 3rem;
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    input[type="text"], input[type="password"] {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        color: rgba(25, 5, 58, 0.5);
+        font-size: 1.5rem;
+        height: 2.5rem;
+        margin: .5rem;
+        border: 0;
+        background-color: aliceblue;
+        &:focus {
+            outline: none;
+            border: 3px solid rgb(250, 208, 0);
+            box-shadow: 0 0 10px #719ECE;
+            color: rgba(25, 5, 58, 0.8);
+        }
+    }
+    input[type="submit"] {
+        color: rgb(250, 208, 0);
+        background: linear-gradient(0.38turn, rgb(41, 46, 74), rgb(58,63,99), rgb(87, 93, 138));
+        border: 1px solid rgb(58,63,99);
+        height: 45px;
+        text-transform: uppercase;
+        cursor: pointer;
+        padding: 0.25rem 1rem;
+        font-size: 1rem;
+        font-weight: 700;
+        border-radius: 30px;
+        transition: .3s ease;
+        &:hover {
+            background: rgba(25, 5, 58, 0.8);
+            color: ghostwhite;
+            border: 2px;
+            box-shadow: 0 2px 5px rgba(23, 5, 58, 0.5);
+            transform: scale(1.1);
+            transition: .3s ease;
+            box-shadow: none;
+        }
+    }
 }

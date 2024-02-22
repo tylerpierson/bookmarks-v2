@@ -1,27 +1,140 @@
-button {
-    background-color: var(--text-dark);
-    color: var(--text-light);
-    border-radius: .5vmin;
-    margin: 1vmin;
-    font-size: 2vmin;
-    height: 3vmin;
-}
-
-a, a:visited, a:link {
-    text-decoration: none;
-    cursor: pointer;
-    color: var(--text-black);
-}
-
-li {
+.listItem {
     text-decoration: none;
     list-style: none;
-    background-color: white;
-    border: 1px solid var(--text-dark);
-    box-shadow: 4px 8px 16px var(--text-dark);
+    font-size: 1.2rem;
+    color: white;
+    border-radius: 20px;
+    border-right: 1px solid rgb(250, 208, 0);
+    border-bottom: 1px solid rgb(250, 208, 0);
+    background-color: var(--bg-dark);
+    box-shadow: 25px 14px 100px rgb(69, 73, 102);
+    width: 475px;
+    margin-bottom: .6rem;
+    max-height: 70px;
+    padding: 1rem;
     display: flex;
-    font-size: 2.5vmin;
-    align-items: center;
     justify-content: space-between;
-    padding: 1.5vmin;
+    align-items: center;
+    transition: .4s ease;
+    position: relative;
+    overflow: hidden;
+    .titleInput {
+        width: 270px;
+        border: none;
+        background: transparent;
+        color: #FFF;
+        font-size: 20px;
+        letter-spacing: 2px;
+        cursor: pointer;
+
+        &:focus {
+            background-color: aliceblue;
+            color: rgb(41, 46, 74);
+            outline: none;
+        }
+    }
+    .urlInput {
+        width: 270px;
+        border: none;
+        background: transparent;
+        color: grey;
+        font-size: 16px;
+        letter-spacing: 2px;
+        cursor: pointer; 
+
+        &:focus {
+            background-color: aliceblue;
+            color: rgb(41, 46, 74);
+            outline: none;
+        }
+    }
+    button {
+        color: rgb(250, 208, 0);
+        background: linear-gradient(0.38turn, rgb(41, 46, 74), rgb(58,63,99), rgb(87, 93, 138));
+        border: 1px solid rgb(58,63,99);
+        height: 45px;
+        text-transform: uppercase;
+        cursor: pointer;
+        padding: 0.25rem 1rem;
+        font-size: 1rem;
+        font-weight: 700;
+        display: inline-block;
+        margin-right: 3rem;
+        border-radius: 30px;
+        transition: .3s ease;
+        &:hover {
+            background: rgba(25, 5, 58, 0.8);
+            color: ghostwhite;
+            border: 2px;
+            box-shadow: 0 2px 5px rgba(23, 5, 58, 0.5);
+            transform: scale(1.1);
+            transition: .3s ease;
+            box-shadow: none;
+        }
+    }
+    
+    a, a:visited, a:link {
+        text-decoration: none;
+        cursor: pointer;
+        width: 90%;
+        border: none;
+        background: transparent;
+        color: grey;
+        font-size: 16px;
+        letter-spacing: 2px;
+        cursor: pointer;
+    }    
+
+    .visitBtnContainer{
+        transform: rotate(-90deg);
+        width: 90px;
+        height: 55px;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        bottom: 12px;
+        right: -19px;
+        .visitBtn {
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            color: rgb(58, 63, 99);
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+
+    .animation {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: transparent;
+        border: 2px solid rgb(250, 208, 0);
+        position: absolute;
+        top: 50%;
+        right: calc(100% + 40px);
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        transition: .5s ease;
+
+        .bookmarkContainer:hover & {
+            transform: scale(100);
+        }
+    }
+    
+    &:hover {
+        box-shadow: 0 0 10px solid white;
+        transform: scale(1.1);
+        transition: .4s ease;
+
+        .animation {
+            transform: scale(100);
+            z-index: -1000;
+        }
+    }
 }

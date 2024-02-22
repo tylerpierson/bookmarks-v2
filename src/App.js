@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Auth from './components/Auth/Auth'
 import CreateBookmark from './components/CreateBookmark/CreateBookmark'
 import BookmarkList from './components/BookmarkList/BookmarkList'
+import styles from './App.module.scss'
 
 export default function App () {
   /*
@@ -151,42 +152,48 @@ export default function App () {
   }, [])
   return (
     <>
-    {
-        token ?
-        <button onClick={() => {
-            localStorage.removeItem('token')
-            window.location.reload()
-        }}>
-            Logout
-        </button>:
-        ''
-    }
-      <Auth
-        login={login}
-        credentials={credentials}
-        handleChangeAuth={handleChangeAuth}
-        signUp={signUp}
-        setToken={setToken}
-        token={token}
-      />
-    {
-        token ?
-        <CreateBookmark
-        createBookmark={createBookmark}
-        bookmark={bookmark}
-        handleChange={handleChange}
-      />:
-      ''
-    }
-    {
-        token ?
-        <BookmarkList
-        bookmarks={bookmarks}
-        deleteBookmark={deleteBookmark}
-        updateBookmark={updateBookmark}
-      />:
-      ''
-    }
+    <div className={styles.App}>
+      {
+          token ?
+          <button 
+          className={styles.button}
+          onClick={() => {
+              localStorage.removeItem('token')
+              window.location.reload()
+          }}>
+              Logout
+          </button>:
+          ''
+      }
+        <Auth
+          login={login}
+          credentials={credentials}
+          handleChangeAuth={handleChangeAuth}
+          signUp={signUp}
+          setToken={setToken}
+          token={token}
+        />
+      <div className={styles.container}>
+        {
+            token ?
+            <CreateBookmark
+            createBookmark={createBookmark}
+            bookmark={bookmark}
+            handleChange={handleChange}
+          />:
+          ''
+        }
+        {
+            token ?
+            <BookmarkList
+            bookmarks={bookmarks}
+            deleteBookmark={deleteBookmark}
+            updateBookmark={updateBookmark}
+          />:
+          ''
+        }
+      </div>
+    </div>
     </>
   )
 }

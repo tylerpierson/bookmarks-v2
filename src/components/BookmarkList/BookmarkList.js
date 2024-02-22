@@ -1,4 +1,5 @@
 import Bookmark from '../Bookmark/Bookmark'
+import styles from './BookmarkList.module.scss'
 
 export default function BookmarkList ({
   bookmarks,
@@ -6,7 +7,7 @@ export default function BookmarkList ({
   deleteBookmark
 }) {
   return (
-    <ul>
+    <ul className={styles.ul}>
       {
             bookmarks.length
               ? bookmarks.map(bookmark => (

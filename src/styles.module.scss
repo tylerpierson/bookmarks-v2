@@ -3,16 +3,15 @@
     --text-light: #968c84;
     --text-dark: #615954;
     --text-black: #161616;
+    --bg-darkest: rgb(45, 48, 79);
+    --bg-dark: rgb(58, 63, 99);
+    --text-gold: rgb(250, 208, 0);
+    --btn-bg: linear-gradient(0.38turn, rgb(41, 46, 74), rgb(58,63,99), rgb(87, 93, 138));
+    --btn-border: 1px solid rgb(58,63,99);
 }
 
 body {
+    font-family: sans-serif;
     margin: 0;
-    padding: 1vw;
-    height: 100vh;
-    background-color: var(--offwhite);
-    color: var(--text-black);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    padding: 0;
 }
