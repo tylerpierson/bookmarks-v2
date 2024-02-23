@@ -27,6 +27,8 @@ export default function App () {
   const [bookmarks, setBookmarks] = useState([])
 
   const [token, setToken] = useState('')
+  const [duplicateUrl, setDuplicateUrl] = useState(false)
+  
   const login = async () => {
     try {
       const response = await fetch('/api/users/login', {
@@ -170,6 +172,9 @@ export default function App () {
               Logout
           </button>:
           ''
+      }
+      {
+        duplicateUrl ? <h1>Bookmark already exists</h1>: ''
       }
         <Auth
           login={login}

@@ -54,6 +54,7 @@ function App() {
   });
   const [bookmarks, setBookmarks] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   const [token, setToken] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
+  const [duplicateUrl, setDuplicateUrl] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const login = async () => {
     try {
       const response = await fetch('/api/users/login', {
@@ -190,7 +191,7 @@ function App() {
       localStorage.removeItem('token');
       window.location.reload();
     }
-  }, "Logout") : '', /*#__PURE__*/React.createElement(_components_Auth_Auth__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, "Logout") : '', duplicateUrl ? /*#__PURE__*/React.createElement("h1", null, "Bookmark already exists") : '', /*#__PURE__*/React.createElement(_components_Auth_Auth__WEBPACK_IMPORTED_MODULE_1__["default"], {
     login: login,
     credentials: credentials,
     handleChangeAuth: handleChangeAuth,
@@ -452,9 +453,7 @@ function CreateBookmark(_ref) {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Login)
 /* harmony export */ });
-/* harmony import */ var _Login_module_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Login.module.scss */ "./src/components/Login/Login.module.scss");
 /* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
 function Login(_ref) {
   let {
     login,
@@ -667,7 +666,6 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.UhNDaS6ukZ19AIax4ZjN {
 }
 
 .WSK0VdTQkLKe8jLQgO_l {
-  width: 35%;
   max-height: 500px;
   display: flex;
   flex-direction: column;
@@ -731,7 +729,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.UhNDaS6ukZ19AIax4ZjN {
   transform: scale(1.1);
   transition: 0.3s ease;
   box-shadow: none;
-}`, "",{"version":3,"sources":["webpack://./src/components/Auth/Auth.module.scss"],"names":[],"mappings":"AAAA;EACI,sBAAA;EACA,eAAA;EACA,kBAAA;AACJ;;AAEA;EACI,yBAAA;EACA,uBAAA;EACA,yBAAA;EACA,eAAA;EACA,eAAA;EACA,gBAAA;EACA,mBAAA;EACA,kBAAA;EACA,eAAA;EACA,cAAA;EACA,cAAA;EACA,qBAAA;AACJ;AAAI;EACI,gCAAA;EACA,iBAAA;EACA,WAAA;EACA,0CAAA;EACA,qBAAA;EACA,qBAAA;EACA,gBAAA;AAER;;AAEA;EACI,UAAA;EACA,iBAAA;EACA,aAAA;EACA,sBAAA;EACA,uBAAA;EACA,mBAAA;EACA,eAAA;EACA,YAAA;EACA,yCAAA;EACA,mBAAA;EACA,wCAAA;EACA,uCAAA;EACA,yCAAA;EACA,sCAAA;EACA,aAAA;EACA,4CAAA;EACA,2BAAA;EACA,gBAAA;AACJ;AAAI;EACI,aAAA;EACA,sBAAA;EACA,uBAAA;EACA,mBAAA;AAER;AAAI;EACI,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,mBAAA;EACA,2BAAA;EACA,iBAAA;EACA,cAAA;EACA,cAAA;EACA,SAAA;EACA,2BAAA;AAER;AADQ;EACI,aAAA;EACA,kCAAA;EACA,4BAAA;EACA,2BAAA;AAGZ;AAAI;EACI,uBAAA;EACA,yFAAA;EACA,iCAAA;EACA,YAAA;EACA,yBAAA;EACA,eAAA;EACA,qBAAA;EACA,eAAA;EACA,gBAAA;EACA,mBAAA;EACA,qBAAA;AAER;AADQ;EACI,gCAAA;EACA,iBAAA;EACA,WAAA;EACA,0CAAA;EACA,qBAAA;EACA,qBAAA;EACA,gBAAA;AAGZ","sourcesContent":[".h1 {\n    color: var(--offwhite);\n    font-size: 3rem;\n    text-align: center;\n}\n\n.button {\n    background: var(--btn-bg);\n    color: var(--text-gold);\n    border: var(--btn-border);\n    font-size: 2rem;\n    padding: 0 1rem;\n    min-height: 4rem;\n    border-radius: 30px;\n    text-align: center;\n    cursor: pointer;\n    display: block;\n    margin: 0 auto;\n    transition: .3s ease;\n    &:hover{\n        background: rgba(25, 5, 58, 0.8);\n        color: ghostwhite;\n        border: 2px;\n        box-shadow: 0 2px 5px rgba(23, 5, 58, 0.5);\n        transform: scale(1.1);\n        transition: .3s ease;\n        box-shadow: none;\n    }\n}\n\n.container {\n    width: 35%;\n    max-height: 500px;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    font-size: 2rem;\n    color: white;\n    text-shadow: 1px 1px 1px rgb(250, 208, 0);\n    border-radius: 20px;\n    border-right: 1px solid rgb(250, 208, 0);\n    border-left: 1px solid rgb(250, 208, 0);\n    border-bottom: 3px solid rgb(250, 208, 0);\n    border-top: 3px solid rgb(250, 208, 0);\n    padding: 5rem;\n    box-shadow: 25px 14px 100px rgb(69, 73, 102);\n    background: rgb(58, 63, 99);\n    margin-top: 3rem;\n    form {\n        display: flex;\n        flex-direction: column;\n        justify-content: center;\n        align-items: center;\n    }\n    input[type=\"text\"], input[type=\"password\"] {\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        border-radius: 10px;\n        color: rgba(25, 5, 58, 0.5);\n        font-size: 1.5rem;\n        height: 2.5rem;\n        margin: .5rem;\n        border: 0;\n        background-color: aliceblue;\n        &:focus {\n            outline: none;\n            border: 3px solid rgb(250, 208, 0);\n            box-shadow: 0 0 10px #719ECE;\n            color: rgba(25, 5, 58, 0.8);\n        }\n    }\n    input[type=\"submit\"] {\n        color: rgb(250, 208, 0);\n        background: linear-gradient(0.38turn, rgb(41, 46, 74), rgb(58,63,99), rgb(87, 93, 138));\n        border: 1px solid rgb(58,63,99);\n        height: 45px;\n        text-transform: uppercase;\n        cursor: pointer;\n        padding: 0.25rem 1rem;\n        font-size: 1rem;\n        font-weight: 700;\n        border-radius: 30px;\n        transition: .3s ease;\n        &:hover {\n            background: rgba(25, 5, 58, 0.8);\n            color: ghostwhite;\n            border: 2px;\n            box-shadow: 0 2px 5px rgba(23, 5, 58, 0.5);\n            transform: scale(1.1);\n            transition: .3s ease;\n            box-shadow: none;\n        }\n    }\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/components/Auth/Auth.module.scss"],"names":[],"mappings":"AAAA;EACI,sBAAA;EACA,eAAA;EACA,kBAAA;AACJ;;AAEA;EACI,yBAAA;EACA,uBAAA;EACA,yBAAA;EACA,eAAA;EACA,eAAA;EACA,gBAAA;EACA,mBAAA;EACA,kBAAA;EACA,eAAA;EACA,cAAA;EACA,cAAA;EACA,qBAAA;AACJ;AAAI;EACI,gCAAA;EACA,iBAAA;EACA,WAAA;EACA,0CAAA;EACA,qBAAA;EACA,qBAAA;EACA,gBAAA;AAER;;AAEA;EACI,iBAAA;EACA,aAAA;EACA,sBAAA;EACA,uBAAA;EACA,mBAAA;EACA,eAAA;EACA,YAAA;EACA,yCAAA;EACA,mBAAA;EACA,wCAAA;EACA,uCAAA;EACA,yCAAA;EACA,sCAAA;EACA,aAAA;EACA,4CAAA;EACA,2BAAA;EACA,gBAAA;AACJ;AAAI;EACI,aAAA;EACA,sBAAA;EACA,uBAAA;EACA,mBAAA;AAER;AAAI;EACI,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,mBAAA;EACA,2BAAA;EACA,iBAAA;EACA,cAAA;EACA,cAAA;EACA,SAAA;EACA,2BAAA;AAER;AADQ;EACI,aAAA;EACA,kCAAA;EACA,4BAAA;EACA,2BAAA;AAGZ;AAAI;EACI,uBAAA;EACA,yFAAA;EACA,iCAAA;EACA,YAAA;EACA,yBAAA;EACA,eAAA;EACA,qBAAA;EACA,eAAA;EACA,gBAAA;EACA,mBAAA;EACA,qBAAA;AAER;AADQ;EACI,gCAAA;EACA,iBAAA;EACA,WAAA;EACA,0CAAA;EACA,qBAAA;EACA,qBAAA;EACA,gBAAA;AAGZ","sourcesContent":[".h1 {\n    color: var(--offwhite);\n    font-size: 3rem;\n    text-align: center;\n}\n\n.button {\n    background: var(--btn-bg);\n    color: var(--text-gold);\n    border: var(--btn-border);\n    font-size: 2rem;\n    padding: 0 1rem;\n    min-height: 4rem;\n    border-radius: 30px;\n    text-align: center;\n    cursor: pointer;\n    display: block;\n    margin: 0 auto;\n    transition: .3s ease;\n    &:hover{\n        background: rgba(25, 5, 58, 0.8);\n        color: ghostwhite;\n        border: 2px;\n        box-shadow: 0 2px 5px rgba(23, 5, 58, 0.5);\n        transform: scale(1.1);\n        transition: .3s ease;\n        box-shadow: none;\n    }\n}\n\n.container {\n    max-height: 500px;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    font-size: 2rem;\n    color: white;\n    text-shadow: 1px 1px 1px rgb(250, 208, 0);\n    border-radius: 20px;\n    border-right: 1px solid rgb(250, 208, 0);\n    border-left: 1px solid rgb(250, 208, 0);\n    border-bottom: 3px solid rgb(250, 208, 0);\n    border-top: 3px solid rgb(250, 208, 0);\n    padding: 5rem;\n    box-shadow: 25px 14px 100px rgb(69, 73, 102);\n    background: rgb(58, 63, 99);\n    margin-top: 3rem;\n    form {\n        display: flex;\n        flex-direction: column;\n        justify-content: center;\n        align-items: center;\n    }\n    input[type=\"text\"], input[type=\"password\"] {\n        display: flex;\n        justify-content: center;\n        align-items: center;\n        border-radius: 10px;\n        color: rgba(25, 5, 58, 0.5);\n        font-size: 1.5rem;\n        height: 2.5rem;\n        margin: .5rem;\n        border: 0;\n        background-color: aliceblue;\n        &:focus {\n            outline: none;\n            border: 3px solid rgb(250, 208, 0);\n            box-shadow: 0 0 10px #719ECE;\n            color: rgba(25, 5, 58, 0.8);\n        }\n    }\n    input[type=\"submit\"] {\n        color: rgb(250, 208, 0);\n        background: linear-gradient(0.38turn, rgb(41, 46, 74), rgb(58,63,99), rgb(87, 93, 138));\n        border: 1px solid rgb(58,63,99);\n        height: 45px;\n        text-transform: uppercase;\n        cursor: pointer;\n        padding: 0.25rem 1rem;\n        font-size: 1rem;\n        font-weight: 700;\n        border-radius: 30px;\n        transition: .3s ease;\n        &:hover {\n            background: rgba(25, 5, 58, 0.8);\n            color: ghostwhite;\n            border: 2px;\n            box-shadow: 0 2px 5px rgba(23, 5, 58, 0.5);\n            transform: scale(1.1);\n            transition: .3s ease;\n            box-shadow: none;\n        }\n    }\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"h1": `UhNDaS6ukZ19AIax4ZjN`,
@@ -926,7 +924,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, `.lP8bUeE__NPUKEd25ulU {
   overflow-y: scroll;
-  width: 100%;
+  width: 50%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -940,7 +938,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.lP8bUeE__NPUKEd25ulU {
 }
 .lP8bUeE__NPUKEd25ulU h2 {
   color: white;
-}`, "",{"version":3,"sources":["webpack://./src/components/BookmarkList/BookmarkList.module.scss"],"names":[],"mappings":"AAAA;EACI,kBAAA;EACA,WAAA;EACA,aAAA;EACA,uBAAA;EACA,uBAAA;AACJ;AAAI;EACI,kBAAA;EACA,UAAA;EACA,aAAA;EACA,sBAAA;EACA,mBAAA;AAER;AACI;EACI,YAAA;AACR","sourcesContent":[".container {\n    overflow-y: scroll;\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: flex-start;\n    .ul {\n        text-align: center;\n        width: 50%;\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n    }\n    \n    h2 {\n        color: white;\n    }\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/components/BookmarkList/BookmarkList.module.scss"],"names":[],"mappings":"AAAA;EACI,kBAAA;EACA,UAAA;EACA,aAAA;EACA,uBAAA;EACA,uBAAA;AACJ;AAAI;EACI,kBAAA;EACA,UAAA;EACA,aAAA;EACA,sBAAA;EACA,mBAAA;AAER;AACI;EACI,YAAA;AACR","sourcesContent":[".container {\n    overflow-y: scroll;\n    width: 50%;\n    display: flex;\n    justify-content: center;\n    align-items: flex-start;\n    .ul {\n        text-align: center;\n        width: 50%;\n        display: flex;\n        flex-direction: column;\n        align-items: center;\n    }\n    \n    h2 {\n        color: white;\n    }\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"container": `lP8bUeE__NPUKEd25ulU`,
@@ -970,8 +968,8 @@ ___CSS_LOADER_EXPORT___.locals = {
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, `.lLGvDjDeRs2OBy9Sy5V1 {
-  width: 35%;
-  max-height: 500px;
+  border: 1px solid red;
+  max-height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1043,7 +1041,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.lLGvDjDeRs2OBy9Sy5V1 {
   transform: scale(1.1);
   transition: 0.3s ease;
   box-shadow: none;
-}`, "",{"version":3,"sources":["webpack://./src/components/CreateBookmark/CreateBookmark.module.scss"],"names":[],"mappings":"AAAA;EACI,UAAA;EACA,iBAAA;EACA,aAAA;EACA,sBAAA;EACA,uBAAA;EACA,mBAAA;EACA,eAAA;EACA,YAAA;EACA,yCAAA;EACA,6BAAA;EACA,gCAAA;EACA,wCAAA;EACA,yCAAA;EACA,aAAA;EACA,4CAAA;EACA,2BAAA;AACJ;AAAI;EACI,aAAA;EACA,sBAAA;EACA,uBAAA;EACA,mBAAA;AAER;AADQ;EACI,aAAA;EACA,sBAAA;EACA,uBAAA;EACA,mBAAA;AAGZ;AADQ;EACI,aAAA;EACA,sBAAA;EACA,qBAAA;AAGZ;AAFY;EACI,mBAAA;EACA,2BAAA;EACA,iBAAA;EACA,cAAA;EACA,cAAA;EACA,SAAA;EACA,2BAAA;AAIhB;AAHgB;EACI,aAAA;EACA,kCAAA;EACA,4BAAA;EACA,2BAAA;AAKpB;AADQ;EACI,uBAAA;EACA,yFAAA;EACA,iCAAA;EACA,YAAA;EACA,yBAAA;EACA,eAAA;EACA,qBAAA;EACA,eAAA;EACA,gBAAA;EACA,qBAAA;EACA,kBAAA;EACA,gBAAA;EACA,mBAAA;EACA,qBAAA;AAGZ;AAFY;EACI,gCAAA;EACA,iBAAA;EACA,WAAA;EACA,0CAAA;EACA,qBAAA;EACA,qBAAA;EACA,gBAAA;AAIhB","sourcesContent":[".formContainer {\n    width: 35%;\n    max-height: 500px;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    font-size: 2rem;\n    color: white;\n    text-shadow: 1px 1px 1px rgb(250, 208, 0);\n    border-top-right-radius: 20px;\n    border-bottom-right-radius: 20px;\n    border-right: 1px solid rgb(250, 208, 0);\n    border-bottom: 3px solid rgb(250, 208, 0);\n    padding: 5rem;\n    box-shadow: 25px 14px 100px rgb(69, 73, 102);\n    background: rgb(58, 63, 99);\n    .container {\n        display: flex;\n        flex-direction: column;\n        justify-content: center;\n        align-items: center;\n        .form {\n            display: flex;\n            flex-direction: column;\n            justify-content: center;\n            align-items: center;\n        }\n        .inputContainer{\n            display: flex;\n            flex-direction: column;\n            align-items: flex-end;\n            input[type=\"text\"] {\n                border-radius: 10px;\n                color: rgba(25, 5, 58, 0.5);\n                font-size: 2.5rem;\n                height: 3.5rem;\n                margin: .5rem;\n                border: 0;\n                background-color: aliceblue;\n                &:focus {\n                    outline: none;\n                    border: 3px solid rgb(250, 208, 0);\n                    box-shadow: 0 0 10px #719ECE;\n                    color: rgba(25, 5, 58, 0.8);\n                }\n            }\n        }\n        input[type=\"submit\"] {\n            color: rgb(250, 208, 0);\n            background: linear-gradient(0.38turn, rgb(41, 46, 74), rgb(58,63,99), rgb(87, 93, 138));\n            border: 1px solid rgb(58,63,99);\n            height: 45px;\n            text-transform: uppercase;\n            cursor: pointer;\n            padding: 0.25rem 1rem;\n            font-size: 1rem;\n            font-weight: 700;\n            display: inline-block;\n            margin-right: 3rem;\n            margin-top: 1rem;\n            border-radius: 30px;\n            transition: .3s ease;\n            &:hover {\n                background: rgba(25, 5, 58, 0.8);\n                color: ghostwhite;\n                border: 2px;\n                box-shadow: 0 2px 5px rgba(23, 5, 58, 0.5);\n                transform: scale(1.1);\n                transition: .3s ease;\n                box-shadow: none;\n            }\n        }\n    }\n}\n"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/components/CreateBookmark/CreateBookmark.module.scss"],"names":[],"mappings":"AAAA;EACI,qBAAA;EACA,iBAAA;EACA,aAAA;EACA,sBAAA;EACA,uBAAA;EACA,mBAAA;EACA,eAAA;EACA,YAAA;EACA,yCAAA;EACA,6BAAA;EACA,gCAAA;EACA,wCAAA;EACA,yCAAA;EACA,aAAA;EACA,4CAAA;EACA,2BAAA;AACJ;AAAI;EACI,aAAA;EACA,sBAAA;EACA,uBAAA;EACA,mBAAA;AAER;AADQ;EACI,aAAA;EACA,sBAAA;EACA,uBAAA;EACA,mBAAA;AAGZ;AADQ;EACI,aAAA;EACA,sBAAA;EACA,qBAAA;AAGZ;AAFY;EACI,mBAAA;EACA,2BAAA;EACA,iBAAA;EACA,cAAA;EACA,cAAA;EACA,SAAA;EACA,2BAAA;AAIhB;AAHgB;EACI,aAAA;EACA,kCAAA;EACA,4BAAA;EACA,2BAAA;AAKpB;AADQ;EACI,uBAAA;EACA,yFAAA;EACA,iCAAA;EACA,YAAA;EACA,yBAAA;EACA,eAAA;EACA,qBAAA;EACA,eAAA;EACA,gBAAA;EACA,qBAAA;EACA,kBAAA;EACA,gBAAA;EACA,mBAAA;EACA,qBAAA;AAGZ;AAFY;EACI,gCAAA;EACA,iBAAA;EACA,WAAA;EACA,0CAAA;EACA,qBAAA;EACA,qBAAA;EACA,gBAAA;AAIhB","sourcesContent":[".formContainer {\n    border: 1px solid red;\n    max-height: 300px;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    font-size: 2rem;\n    color: white;\n    text-shadow: 1px 1px 1px rgb(250, 208, 0);\n    border-top-right-radius: 20px;\n    border-bottom-right-radius: 20px;\n    border-right: 1px solid rgb(250, 208, 0);\n    border-bottom: 3px solid rgb(250, 208, 0);\n    padding: 5rem;\n    box-shadow: 25px 14px 100px rgb(69, 73, 102);\n    background: rgb(58, 63, 99);\n    .container {\n        display: flex;\n        flex-direction: column;\n        justify-content: center;\n        align-items: center;\n        .form {\n            display: flex;\n            flex-direction: column;\n            justify-content: center;\n            align-items: center;\n        }\n        .inputContainer{\n            display: flex;\n            flex-direction: column;\n            align-items: flex-end;\n            input[type=\"text\"] {\n                border-radius: 10px;\n                color: rgba(25, 5, 58, 0.5);\n                font-size: 2.5rem;\n                height: 3.5rem;\n                margin: .5rem;\n                border: 0;\n                background-color: aliceblue;\n                &:focus {\n                    outline: none;\n                    border: 3px solid rgb(250, 208, 0);\n                    box-shadow: 0 0 10px #719ECE;\n                    color: rgba(25, 5, 58, 0.8);\n                }\n            }\n        }\n        input[type=\"submit\"] {\n            color: rgb(250, 208, 0);\n            background: linear-gradient(0.38turn, rgb(41, 46, 74), rgb(58,63,99), rgb(87, 93, 138));\n            border: 1px solid rgb(58,63,99);\n            height: 45px;\n            text-transform: uppercase;\n            cursor: pointer;\n            padding: 0.25rem 1rem;\n            font-size: 1rem;\n            font-weight: 700;\n            display: inline-block;\n            margin-right: 3rem;\n            margin-top: 1rem;\n            border-radius: 30px;\n            transition: .3s ease;\n            &:hover {\n                background: rgba(25, 5, 58, 0.8);\n                color: ghostwhite;\n                border: 2px;\n                box-shadow: 0 2px 5px rgba(23, 5, 58, 0.5);\n                transform: scale(1.1);\n                transition: .3s ease;\n                box-shadow: none;\n            }\n        }\n    }\n}\n"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"formContainer": `lLGvDjDeRs2OBy9Sy5V1`,
@@ -1051,32 +1049,6 @@ ___CSS_LOADER_EXPORT___.locals = {
 	"form": `xyJeLQSMqYvHToOPg1j2`,
 	"inputContainer": `gmo3bnDTLZpX3ZmrcdIa`
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./src/components/Login/Login.module.scss":
-/*!***************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./src/components/Login/Login.module.scss ***!
-  \***************************************************************************************************************************************************************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
-// Imports
-
-
-var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
-// Module
-___CSS_LOADER_EXPORT___.push([module.id, ``, "",{"version":3,"sources":[],"names":[],"mappings":"","sourceRoot":""}]);
-// Exports
-___CSS_LOADER_EXPORT___.locals = {};
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
 
@@ -1385,56 +1357,6 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
        /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_2_use_1_node_modules_sass_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_CreateBookmark_module_scss__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_2_use_1_node_modules_sass_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_CreateBookmark_module_scss__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_2_use_1_node_modules_sass_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_CreateBookmark_module_scss__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
-
-
-/***/ }),
-
-/***/ "./src/components/Login/Login.module.scss":
-/*!************************************************!*\
-  !*** ./src/components/Login/Login.module.scss ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
-
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/styleDomAPI.js */ "./node_modules/style-loader/dist/runtime/styleDomAPI.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/insertBySelector.js */ "./node_modules/style-loader/dist/runtime/insertBySelector.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js */ "./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/insertStyleElement.js */ "./node_modules/style-loader/dist/runtime/insertStyleElement.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/styleTagTransform.js */ "./node_modules/style-loader/dist/runtime/styleTagTransform.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_2_use_1_node_modules_sass_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_Login_module_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!../../../node_modules/sass-loader/dist/cjs.js!../../../node_modules/postcss-loader/dist/cjs.js!./Login.module.scss */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/sass-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./src/components/Login/Login.module.scss");
-
-      
-      
-      
-      
-      
-      
-      
-      
-      
-
-var options = {};
-
-options.styleTagTransform = (_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default());
-options.setAttributes = (_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default());
-
-      options.insert = _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default().bind(null, "head");
-    
-options.domAPI = (_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default());
-options.insertStyleElement = (_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default());
-
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_2_use_1_node_modules_sass_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_Login_module_scss__WEBPACK_IMPORTED_MODULE_6__["default"], options);
-
-
-
-
-       /* unused harmony default export */ var __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_2_use_1_node_modules_sass_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_Login_module_scss__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_2_use_1_node_modules_sass_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_Login_module_scss__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_2_use_1_node_modules_sass_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_Login_module_scss__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
 
 
 /***/ }),
