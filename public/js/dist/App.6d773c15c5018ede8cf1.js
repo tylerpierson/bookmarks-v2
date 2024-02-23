@@ -380,7 +380,7 @@ function BookmarkList(_ref) {
     bookmark: bookmark,
     updateBookmark: updateBookmark,
     deleteBookmark: deleteBookmark
-  })) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h2", null, "No Bookmarks Yet... Add one in the Form Above")))));
+  })) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h2", null, "No Bookmarks Yet... Add one in the Form")))));
 }
 
 /***/ }),
