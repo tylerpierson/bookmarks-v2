@@ -65,6 +65,11 @@ export default function App () {
   }
   const createBookmark = async () => {
     try {
+      const duplicateUrl = bookmarks.some(item => item.url === bookmark.url)
+      if (duplicateUrl) {
+        throw new Error('Bookmark with this URL already exists.')
+      }
+  
       const response = await fetch('/api/bookmarks', {
         method: 'POST',
         headers: {
@@ -76,7 +81,7 @@ export default function App () {
       const data = await response.json()
       setBookmarks([data, ...bookmarks])
     } catch (error) {
-      console.error(error)
+      console.error(error.message)
     } finally {
       setBookmark({
         title: '',
@@ -84,6 +89,7 @@ export default function App () {
       })
     }
   }
+  
   const listBookmarksByUser = async () => {
     try {
       const response = await fetch('/api/users/bookmarks', {
