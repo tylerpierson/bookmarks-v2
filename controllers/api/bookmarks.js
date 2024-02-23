@@ -9,6 +9,9 @@ const User = require('../../models/user')
 const destroyBookmark = async (req, res, next) => {
   try {
     const deletedBookmark = await Bookmark.findByIdAndDelete(req.params.id)
+    const user = await User.findOne({ email: res.locals.data.email })
+    user.bookmarks.pull(deletedBookmark)
+    await user.save()
     res.locals.data.bookmark = deletedBookmark
     next()
   } catch (error) {
